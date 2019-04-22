@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4CBAF6</color>
+    <color name="colorPrimaryDark">#4CBAF6</color>
+    <color name="colorAccent">#30A3FE</color>
+    <color name="divider_gray">#dbdbdb</color>
+    <!--蒙版-->
+    <color name="colorMask">#66000000</color>
+    <color name="white">#ffffff</color>
+
+</resources>

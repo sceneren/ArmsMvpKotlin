@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		tools:background="?attr/colorPrimary"
+		app:contentInsetStart="0dp"
+		>
+	
+	<RelativeLayout
+			android:id="@+id/toolbar_back"
+			android:paddingStart="31mm"
+			android:paddingEnd="31mm"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="start">
+		
+		<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:src="@mipmap/ic_arrow_back_white_24dp"/>
+	</RelativeLayout>
+	
+	<TextView
+			android:id="@+id/toolbar_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/white"
+			android:textSize="18mm"
+			tools:text="@string/app_name"/>
+	
+	<TextView
+			android:id="@+id/toolbar_submit"
+			android:visibility="gone"
+			android:layout_gravity="end"
+			android:paddingStart="57mm"
+			android:paddingEnd="67mm"
+			android:layout_width="wrap_content"
+			android:text="提交"
+			android:textColor="@color/white"
+			android:textSize="18mm"
+			android:gravity="center"
+			android:layout_height="match_parent"/>
+
+</android.support.v7.widget.Toolbar>
