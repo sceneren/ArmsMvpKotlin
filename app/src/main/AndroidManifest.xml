@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.daomingedu.art">
+          package="com.example.arms">
     <!-- if you want to load images from the internet -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/> <!-- if you want to load images from a file OR from the internet -->
@@ -39,7 +39,7 @@
                 android:name="design_height_in_dp"
                 android:value="800"/> <!-- Arms 配置 -->
         <meta-data
-                android:name="com.daomingedu.art.app.GlobalConfiguration"
+                android:name="com.example.arms.app.GlobalConfiguration"
                 android:value="ConfigModule"/> <!-- 适配18:9 -->
         <meta-data
                 android:name="android.max_aspect"
@@ -47,7 +47,7 @@
 
         <provider
                 android:name="android.support.v4.content.FileProvider"
-                android:authorities="com.daomingedu.art.installapk"
+                android:authorities="com.example.arms.installapk"
                 android:exported="false"
                 android:grantUriPermissions="true">
 

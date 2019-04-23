@@ -1,1 +1,1 @@
--keep class com.daomingedu.art.app.GlobalConfiguration
+-keep class com.example.arms.app.GlobalConfiguration

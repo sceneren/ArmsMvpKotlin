@@ -1,4 +1,4 @@
-package com.daomingedu.art
+package com.example.arms
 
 import org.junit.Test
 
