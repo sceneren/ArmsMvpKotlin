@@ -26,12 +26,18 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // 64k
         multiDexEnabled true
 
         ndk {
             abiFilters "armeabi-v7a"//, "x86"//仿淘宝、微信、FaceBook、Twitter一样，一个api闯天下，目前主流手机cpu多属于armeabi-v7a
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
         }
     }
     buildTypes {
@@ -72,10 +78,10 @@ buildscript {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:support-v4:28.0.0'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    androidTestImplementation rootProject.ext.dependencies["runner"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-core"]
 
     //注意 Arms 核心库现在并不会依赖某个 EventBus, 要想使用 EventBus, 还请在项目中自行依赖对应的 EventBus
 
@@ -106,31 +112,37 @@ dependencies {
     //    implementation rootProject.ext.dependencies["appcompat-v7"]
 
     //tools
+    implementation rootProject.ext.dependencies["dagger2"]
     kapt rootProject.ext.dependencies["dagger2-compiler"]
     implementation rootProject.ext.dependencies["progressmanager"]
     implementation rootProject.ext.dependencies["retrofit-url-manager"]
     implementation rootProject.ext.dependencies["lifecyclemodel"]
-    implementation rootProject.ext.dependencies["anko-commons"]
-    implementation rootProject.ext.dependencies["anko-appcompat-v7"]
+//    implementation rootProject.ext.dependencies["anko-commons"]
+//    implementation rootProject.ext.dependencies["anko-appcompat-v7"]
     implementation rootProject.ext.dependencies["imagepicker"]
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
-
+    implementation rootProject.ext.dependencies["threetenabp"]
     //view
     implementation rootProject.ext.dependencies["baseRecyclerViewAdapterHelper"]
 
     //support
     implementation rootProject.ext.dependencies["design"]
-    implementation rootProject.ext.dependencies["support-v4"]
+    implementation rootProject.ext.dependencies["cardview-androidX"]
+    implementation rootProject.ext.dependencies["recyclerview-androidX"]
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["core-ktx"]
+    implementation rootProject.ext.dependencies["constraintlayout"]
 
     //64K
     implementation rootProject.ext.dependencies["multidex"]
 
     //test
     testImplementation rootProject.ext.dependencies["junit"]
-    debugImplementation rootProject.ext.dependencies["canary-debug"]
-    releaseImplementation rootProject.ext.dependencies["canary-release"]
-    testImplementation rootProject.ext.dependencies["canary-release"]
-
+    debugImplementation rootProject.ext.dependencies["canary"]
+    //arouter
+    implementation rootProject.ext.dependencies["arouter"]
+    kapt rootProject.ext.dependencies["arouter-compiler"]
+    //rxKotlin
+    implementation rootProject.ext.dependencies["rxKotlin"]
 }
 repositories {
     mavenCentral()

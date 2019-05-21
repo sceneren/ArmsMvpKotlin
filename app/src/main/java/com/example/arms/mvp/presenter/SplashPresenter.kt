@@ -31,33 +31,8 @@ constructor(model: SplashContract.Model, rootView: SplashContract.View) :
         super.onDestroy()
     }
 
-    /*fun fileSize(){
-        mModel.fileSize(Constant.KEY)
-            .subscribeOn(Schedulers.io())
-            .retryWhen(RetryWithDelay(2, 5))
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-            .subscribe(object : ErrorHandleSubscriber<BaseJson<FileSizeBean>>(mErrorHandler) {
-                override fun onNext(t: BaseJson<FileSizeBean>) {
-                    if (t.code == Api.SUCCESS) {
-                        val data = t.data
-                        if (data != null) {
-                            mImageFileSize = data.image.toLong()
-                            mRecordFileSize = data.record.toLong()
-                            mVideoFileSize = data.video.toLong()
-                        }
-                        mCosPath = t.data?.cosPath?:""
-                        mRootView.requestFileSizeSuccess()
-                    } else {
-                        mRootView.requestFileSizeFail()
-                        mRootView.showMessage(t.msg)
-                    }
-                }
+     fun testToMain(){
+        mRootView.toMain()
+    }
 
-                override fun onError(t: Throwable) {
-                    super.onError(t)
-                }
-            })
-    }*/
 }

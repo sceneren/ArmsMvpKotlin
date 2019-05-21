@@ -40,6 +40,7 @@ class Preference<T>(private val key: String, private val default: T) : ReadWrite
                 else -> throw IllegalArgumentException("This type can be saved into Preferences")
             }
             res as T
+
         }
 
 

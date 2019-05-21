@@ -3,16 +3,16 @@ package com.example.arms.mvp.ui.decoration
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.OrientationHelper
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 
 
-class DividerDecoration : RecyclerView.ItemDecoration {
+class DividerDecoration : androidx.recyclerview.widget.RecyclerView.ItemDecoration {
   private var mColorDrawable: ColorDrawable? = null
   private var mHeight: Int = 0
   private var mPaddingLeft: Int = 0
@@ -40,7 +40,7 @@ class DividerDecoration : RecyclerView.ItemDecoration {
     this.mDrawHeaderFooter = mDrawHeaderFooter
   }
 
-  override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+  override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
     val position = parent.getChildAdapterPosition(view)
     var orientation = 0
     var headerCount = 0
@@ -51,16 +51,16 @@ class DividerDecoration : RecyclerView.ItemDecoration {
     }
 
     val layoutManager = parent.layoutManager
-    if (layoutManager is StaggeredGridLayoutManager) {
+    if (layoutManager is androidx.recyclerview.widget.StaggeredGridLayoutManager) {
       orientation = layoutManager.orientation
-    } else if (layoutManager is GridLayoutManager) {
+    } else if (layoutManager is androidx.recyclerview.widget.GridLayoutManager) {
       orientation = layoutManager.orientation
-    } else if (layoutManager is LinearLayoutManager) {
+    } else if (layoutManager is androidx.recyclerview.widget.LinearLayoutManager) {
       orientation = layoutManager.orientation
     }
 
     if (position >= headerCount && position < parent.adapter!!.itemCount - footerCount || mDrawHeaderFooter) {
-      if (orientation == OrientationHelper.VERTICAL) {
+      if (orientation == androidx.recyclerview.widget.OrientationHelper.VERTICAL) {
         outRect.bottom = mHeight
       } else {
         outRect.right = mHeight
@@ -68,7 +68,7 @@ class DividerDecoration : RecyclerView.ItemDecoration {
     }
   }
 
-  override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+  override fun onDraw(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
 
     if (parent.adapter == null) {
       return
@@ -91,16 +91,16 @@ class DividerDecoration : RecyclerView.ItemDecoration {
 
 
     val layoutManager = parent.layoutManager
-    if (layoutManager is StaggeredGridLayoutManager) {
+    if (layoutManager is androidx.recyclerview.widget.StaggeredGridLayoutManager) {
       orientation = layoutManager.orientation
-    } else if (layoutManager is GridLayoutManager) {
+    } else if (layoutManager is androidx.recyclerview.widget.GridLayoutManager) {
       orientation = layoutManager.orientation
-    } else if (layoutManager is LinearLayoutManager) {
+    } else if (layoutManager is androidx.recyclerview.widget.LinearLayoutManager) {
       orientation = layoutManager.orientation
     }
     val start: Int
     val end: Int
-    if (orientation == OrientationHelper.VERTICAL) {
+    if (orientation == androidx.recyclerview.widget.OrientationHelper.VERTICAL) {
       start = parent.paddingLeft + mPaddingLeft
       end = parent.width - parent.paddingRight - mPaddingRight
     } else {
@@ -120,14 +120,14 @@ class DividerDecoration : RecyclerView.ItemDecoration {
         || !(position >= dataStartPosition && position < dataEndPosition) && mDrawHeaderFooter//header&footer且可绘制
       ) {
 
-        if (orientation == OrientationHelper.VERTICAL) {
-          val params = child.layoutParams as RecyclerView.LayoutParams
+        if (orientation == androidx.recyclerview.widget.OrientationHelper.VERTICAL) {
+          val params = child.layoutParams as androidx.recyclerview.widget.RecyclerView.LayoutParams
           val top = child.bottom + params.bottomMargin
           val bottom = top + mHeight
           mColorDrawable!!.setBounds(start, top, end, bottom)
           mColorDrawable!!.draw(c)
         } else {
-          val params = child.layoutParams as RecyclerView.LayoutParams
+          val params = child.layoutParams as androidx.recyclerview.widget.RecyclerView.LayoutParams
           val left = child.right + params.rightMargin
           val right = left + mHeight
           mColorDrawable!!.setBounds(left, start, right, end)

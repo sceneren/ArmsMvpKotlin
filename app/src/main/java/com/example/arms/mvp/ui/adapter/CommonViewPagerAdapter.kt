@@ -1,15 +1,15 @@
 package com.example.arms.mvp.ui.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
 class CommonViewPagerAdapter(
-	fragmentManager: FragmentManager,
-	val tabTitles: Array<String>,
-	val fragments: MutableList<Fragment>
-): FragmentPagerAdapter(fragmentManager) {
-	override fun getItem(position: Int): Fragment {
+    fragmentManager: androidx.fragment.app.FragmentManager,
+    val tabTitles: Array<String>,
+    val fragments: MutableList<androidx.fragment.app.Fragment>
+): androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
+	override fun getItem(position: Int): androidx.fragment.app.Fragment {
 		return fragments[position]
 	}
 

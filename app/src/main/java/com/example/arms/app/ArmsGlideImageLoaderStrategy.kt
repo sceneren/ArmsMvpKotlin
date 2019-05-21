@@ -1,5 +1,6 @@
 package com.example.arms.app
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
@@ -27,6 +28,7 @@ import timber.log.Timber
  */
 class ArmsGlideImageLoaderStrategy : BaseImageLoaderStrategy<ArmsImageConfig>, GlideAppliesOptions {
 
+	@SuppressLint("CheckResult")
 	override fun loadImage(ctx: Context?, config: ArmsImageConfig?) {
 		if (ctx == null) throw NullPointerException("Context is required")
 		if (config == null) throw NullPointerException("ImageConfigImpl is required")
@@ -34,9 +36,9 @@ class ArmsGlideImageLoaderStrategy : BaseImageLoaderStrategy<ArmsImageConfig>, G
 		if (config.imageView == null) throw NullPointerException("Imageview is required")
 
 
-		val requests: GlideRequests
+		val requests: GlideRequests = GlideArms.with(ctx)
 
-		requests = GlideArms.with(ctx)//如果context是activity则自动使用Activity的生命周期
+		//如果context是activity则自动使用Activity的生命周期
 
 		val glideRequest = requests.load(config.url)
 
@@ -104,6 +106,7 @@ class ArmsGlideImageLoaderStrategy : BaseImageLoaderStrategy<ArmsImageConfig>, G
 			.into(config.imageView)
 	}
 
+	@SuppressLint("CheckResult")
 	override fun clear(ctx: Context?, config: ArmsImageConfig?) {
 		if (ctx == null) throw NullPointerException("Context is required")
 		if (config == null) throw NullPointerException("ImageConfigImpl is required")

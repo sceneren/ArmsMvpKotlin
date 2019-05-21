@@ -1,8 +1,9 @@
-package com.example.arms.util.network;
+package com.example.arms.util.network
+
 /**
  * 定义网络类型
  */
-public enum NetworkType {
+enum class NetworkType private constructor(private val desc: String) {
     /**
      * 网络类型
      */
@@ -13,13 +14,7 @@ public enum NetworkType {
     NETWORK_UNKNOWN("Unknown"),
     NETWORK_NO("No network");
 
-    private String desc;
-    NetworkType(String desc) {
-        this.desc = desc;
-    }
-
-    @Override
-    public String toString() {
-        return desc;
+    override fun toString(): String {
+        return desc
     }
 }

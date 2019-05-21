@@ -5,10 +5,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import java.util.*
 
 /**
@@ -36,7 +36,7 @@ private fun <M : Map<Int, *>> codeGenerate(map: M): Int {
  * @receiver FragmentManager
  * @return EmptyFragment 已创建并已添加到Activity中的Fragment
  */
-private fun findOrCreateEmptyFragment(manager: FragmentManager): EmptyFragment {
+private fun findOrCreateEmptyFragment(manager: androidx.fragment.app.FragmentManager): EmptyFragment {
     return manager.findFragmentByTag(FRAGMENT_TAG) as? EmptyFragment ?: EmptyFragment().also {
         manager.beginTransaction().replace(android.R.id.content, it, FRAGMENT_TAG).commitNowAllowingStateLoss()
     }
@@ -52,7 +52,7 @@ private fun findOrCreateEmptyFragment(manager: FragmentManager): EmptyFragment {
  * @return LambdaHolder<Intent> 可以在此对象上继续调用 [LambdaHolder#onCanceled]或
  *      [LambdaHolder#onDefined] 方法来设置 ResultCode 为 RESULT_CANCELED 或 RESULT_FIRST_USER 时的回调
  */
-fun <F : FragmentActivity> F.startActivityForResult(
+fun <F : androidx.fragment.app.FragmentActivity> F.startActivityForResult(
         intent: Intent,
         options: Bundle? = null,
         callback: (Intent) -> Unit = {}): LambdaHolder<Intent> {
@@ -72,7 +72,7 @@ fun <F : FragmentActivity> F.startActivityForResult(
  * @param onRequestDone () -> Unit  申请成功时的回调
  * @return LambdaHolder<Unit>   可以在此对象上继续调用[#onDenied]方法来设置申请失败时的回调
  */
-fun <F : FragmentActivity> F.requestPermissions(
+fun <F : androidx.fragment.app.FragmentActivity> F.requestPermissions(
         vararg permission: String,
         onRequestDone: () -> Unit): LambdaHolder<Unit> {
     //获取一个与已有编码不重复的编码
@@ -86,7 +86,7 @@ fun <F : FragmentActivity> F.requestPermissions(
 }
 
 
-internal class EmptyFragment : Fragment() {
+internal class EmptyFragment : androidx.fragment.app.Fragment() {
 
     internal fun startActivityForResult(requestCode: Int, intent: Intent, options: Bundle? = null, callback: (Intent) -> Unit): LambdaHolder<Intent> {
         return LambdaHolder(callback).also {
@@ -101,8 +101,8 @@ internal class EmptyFragment : Fragment() {
         resultHolder.remove(requestCode)?.let {
             it.before()
             when (resultCode) {
-                FragmentActivity.RESULT_OK -> it.onSuccess(data ?: Intent())
-                FragmentActivity.RESULT_CANCELED -> it.onCanceled()
+                androidx.fragment.app.FragmentActivity.RESULT_OK -> it.onSuccess(data ?: Intent())
+                androidx.fragment.app.FragmentActivity.RESULT_CANCELED -> it.onCanceled()
                 else -> it.onDefined(data)
             }
         }

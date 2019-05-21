@@ -55,18 +55,4 @@ object RxUtils {
         }
     }
 
-    /**
-     * 此方法已废弃
-     *
-     * @param view
-     * @param <T>
-     * @return
-     * @see RxLifecycleUtils 此类可以实现 {@link RxLifecycle} 的所有功能, 使用方法和之前一致
-     *
-    </T> */
-    @Deprecated("Use {@link RxLifecycleUtils#bindToLifecycle(IView)} instead")
-    fun <T> bindToLifecycle(view: IView): LifecycleTransformer<T> {
-        return RxLifecycleUtils.bindToLifecycle(view)
-    }
-
 }
