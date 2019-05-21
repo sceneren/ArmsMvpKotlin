@@ -1,18 +1,25 @@
 package com.example.arms.mvp.ui.activity
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.example.arms.R
-import com.example.arms.app.onClick
 import com.example.arms.di.component.DaggerSplashComponent
 import com.example.arms.di.module.SplashModule
 import com.example.arms.mvp.contract.SplashContract
 import com.example.arms.mvp.presenter.SplashPresenter
+import com.jakewharton.rxbinding3.view.clicks
 import com.jess.arms.base.BaseActivity
 import com.jess.arms.di.component.AppComponent
+import com.jess.arms.mvp.IView
 import com.jess.arms.utils.ArmsUtils
+import com.jess.arms.utils.RxLifecycleUtils
+import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_splash.*
+import org.threeten.bp.Instant
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -29,14 +36,15 @@ import kotlinx.android.synthetic.main.activity_splash.*
  * }
  */
 class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View {
-
+    private var rxPermissions: RxPermissions? = null
     override fun setupActivityComponent(appComponent: AppComponent) {
+        rxPermissions = RxPermissions(this)
         DaggerSplashComponent //如找不到该类,请编译一下项目
-                .builder()
-                .appComponent(appComponent)
-                .splashModule(SplashModule(this))
-                .build()
-                .inject(this)
+            .builder()
+            .appComponent(appComponent)
+            .splashModule(SplashModule(this))
+            .build()
+            .inject(this)
     }
 
 
@@ -51,12 +59,19 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View {
 
 
     override fun initData(savedInstanceState: Bundle?) {
-//        startActivity<LoginActivity>()
-//        overridePendingTransition(0,0)
-//        killMyself()
-        btnTest.onClick {
-            mPresenter?.testToMain()
-        }
+        btnTest.clicks()
+            .throttleFirst(1, TimeUnit.SECONDS)
+            .compose(
+                rxPermissions?.ensure(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            )
+            .compose(RxLifecycleUtils.bindToLifecycle(this as IView))
+            .subscribe {
+                mPresenter?.testToMain()
+                Timber.e("点击时间：" + Instant.now())
+            }
     }
 
 
@@ -82,5 +97,8 @@ class SplashActivity : BaseActivity<SplashPresenter>(), SplashContract.View {
 
     override fun killMyself() {
         finish()
+    }
+
+    override fun onBackPressed() {
     }
 }

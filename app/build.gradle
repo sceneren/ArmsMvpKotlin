@@ -117,8 +117,6 @@ dependencies {
     implementation rootProject.ext.dependencies["progressmanager"]
     implementation rootProject.ext.dependencies["retrofit-url-manager"]
     implementation rootProject.ext.dependencies["lifecyclemodel"]
-//    implementation rootProject.ext.dependencies["anko-commons"]
-//    implementation rootProject.ext.dependencies["anko-appcompat-v7"]
     implementation rootProject.ext.dependencies["imagepicker"]
     implementation rootProject.ext.dependencies["threetenabp"]
     //view
@@ -143,6 +141,23 @@ dependencies {
     kapt rootProject.ext.dependencies["arouter-compiler"]
     //rxKotlin
     implementation rootProject.ext.dependencies["rxKotlin"]
+    //基础控件
+    implementation 'com.github.AriesHoo.UIWidget:widget-core:3.2.14'
+    //工具类
+    implementation 'com.blankj:utilcodex:1.23.7'
+    //RxBinding
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-appcompat:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-drawerlayout:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-leanback:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-recyclerview:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-viewpager:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-material:3.0.0-alpha2'
+    //textView
+    implementation 'com.github.lygttpod:SuperTextView:2.2.3'
 }
 repositories {
     mavenCentral()

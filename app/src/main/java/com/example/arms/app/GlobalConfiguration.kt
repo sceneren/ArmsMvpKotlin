@@ -17,16 +17,17 @@ package com.example.arms.app
 
 import android.app.Application
 import android.content.Context
-import androidx.fragment.app.FragmentManager
+import com.example.arms.BuildConfig
+import com.example.arms.mvp.model.api.Api
 import com.jess.arms.base.delegate.AppLifecycles
 import com.jess.arms.di.module.GlobalConfigModule
 import com.jess.arms.http.log.RequestInterceptor
 import com.jess.arms.integration.ConfigModule
-import com.example.arms.BuildConfig
-import com.example.arms.mvp.model.api.Api
 import me.jessyan.progressmanager.ProgressManager
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager
 import java.util.concurrent.TimeUnit
+import javax.net.SocketFactory
+import javax.net.ssl.SSLSocketFactory
 
 /**
  * ================================================
@@ -54,7 +55,7 @@ class GlobalConfiguration : ConfigModule {
     //    public static String sDomain = Api.APP_DOMAIN;
 
     override fun applyOptions(context: Context, builder: GlobalConfigModule.Builder) {
-        if (!BuildConfig.LOG_DEBUG) { //Release 时, 让框架不再打印 Http 请求和响应的信息
+        if (!BuildConfig.DEBUG) { //Release 时, 让框架不再打印 Http 请求和响应的信息
             builder.printHttpLogLevel(RequestInterceptor.Level.NONE)
         }
 
@@ -133,14 +134,14 @@ class GlobalConfiguration : ConfigModule {
             }
             .retrofitConfiguration {//这里可以自己自定义配置 Retrofit 的参数, 甚至您可以替换框架配置好的 OkHttpClient 对象 (但是不建议这样做, 这样做您将损失框架提供的很多功能)
                     _, retrofitBuilder ->
-                //                    retrofitBuilder.addConverterFactory(FastJsonConverterFactory.create());//比如使用 FastJson 替代 Gson
+                //                                    retrofitBuilder.addConverterFactory(FastJsonConverterFactory.create());//比如使用 FastJson 替代 Gson
             }
             .okhttpConfiguration {//这里可以自己自定义配置 Okhttp 的参数
                     _, okhttpBuilder ->
-                //                    okhttpBuilder.sslSocketFactory(); //支持 Https, 详情请百度
+                //                                    okhttpBuilder.sslSocketFactory() //支持 Https, 详情请百度
                 okhttpBuilder.writeTimeout(60, TimeUnit.SECONDS)
-                    .connectTimeout(60,TimeUnit.SECONDS)
-                    .readTimeout(60,TimeUnit.SECONDS)
+                    .connectTimeout(60, TimeUnit.SECONDS)
+                    .readTimeout(60, TimeUnit.SECONDS)
                 //使用一行代码监听 Retrofit／Okhttp 上传下载进度监听,以及 Glide 加载进度监听, 详细使用方法请查看 https://github.com/JessYanCoding/ProgressManager
                 ProgressManager.getInstance().with(okhttpBuilder)
                 //让 Retrofit 同时支持多个 BaseUrl 以及动态改变 BaseUrl, 详细使用方法请查看 https://github.com/JessYanCoding/RetrofitUrlManager

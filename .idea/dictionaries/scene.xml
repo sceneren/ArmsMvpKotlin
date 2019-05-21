@@ -2,6 +2,10 @@
   <dictionary name="scene">
     <words>
       <w>arouter</w>
+      <w>autodispose</w>
+      <w>gson</w>
+      <w>lifecycles</w>
+      <w>okhttp</w>
       <w>umeng</w>
     </words>
   </dictionary>

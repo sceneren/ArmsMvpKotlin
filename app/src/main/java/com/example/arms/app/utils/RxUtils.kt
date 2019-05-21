@@ -17,17 +17,10 @@ package com.example.arms.app.utils
 
 import com.jess.arms.mvp.IView
 import com.jess.arms.utils.RxLifecycleUtils
-import com.trello.rxlifecycle2.LifecycleTransformer
-import com.trello.rxlifecycle2.RxLifecycle
-
-import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.annotations.NonNull
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Action
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+
 
 /**
  * ================================================

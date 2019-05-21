@@ -58,6 +58,7 @@ class AppLifecyclesImpl : AppLifecycles {
         initImagePicker()
         InitializeService.start(application)
         initARouter(application)
+        AndroidThreeTen.init(application)
     }
 
     private fun initARouter(application: Application) {
